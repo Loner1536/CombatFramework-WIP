@@ -1,6 +1,7 @@
 -- !strict
 
 --// Utils //--
+local Network = require(script.Parent.Parent.Utils).Network
 local isServerContext = require(script.Parent.Parent.Utils).isServerContext
 local logWarning = require(script.Parent.Parent.Utils).logWarning
 local logError = require(script.Parent.Parent.Utils).logMessage
@@ -17,12 +18,11 @@ do
 		self.internal_IsActive = false
 		self.internal_Network = {}
 
-		CurrentInstance = self
 		return self
 	end
 
 	function Client:SetNetwork(NetworkPath)
-		self.Network = require(NetworkPath)
+		Network.Set(NetworkPath)
 	end
 
 	function Client:Start()
@@ -30,7 +30,7 @@ do
 			logWarning("Attempted to :Start() Client twice!")
 			return nil
 		end
-		print("Starting Client...", self)
+
 		self._internal_isActive = true
 		return nil
 	end

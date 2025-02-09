@@ -1,6 +1,8 @@
 -- !strict
 
 --// Utils //--
+local Fusion = require(script.Parent.Parent.Utils).Fusion
+local Network = require(script.Parent.Parent.Utils).Network
 local IsClientContext = require(script.Parent.Parent.Utils).isClientContext
 local logWarning = require(script.Parent.Parent.Utils).logWarning
 local logError = require(script.Parent.Parent.Utils).logMessage
@@ -22,7 +24,10 @@ do
 	end
 
 	function Server:SetNetwork(NetworkPath)
-		self.Network = require(NetworkPath)
+		Network.Set(NetworkPath)
+	end
+	function Server:SetFusion(FusionPath)
+		Fusion.Set(FusionPath)
 	end
 
 	function Server:Start()

@@ -2,19 +2,25 @@
 
 export type Client = {
 	new: () -> (),
-	SetNetwork: (string) -> (),
+	SetNetwork: (Path: string) -> (),
 	Start: (Client) -> (),
 }
 
 export type Server = {
 	new: () -> (),
-	SetNetwork: (string) -> (),
+	SetNetwork: (Path: string) -> (),
+	SetFusion: (Path: string) -> (),
 	Start: (Server) -> (),
 }
 
+export type Charcter = {
+	new: (Character: Model) -> (),
+	GetCharacterByModel: (Model) -> Charcter,
+}
 export type Framework = {
 	CreateClient: () -> Client,
 	CreateServer: () -> Server,
+	Character: Charcter,
 }
 
 return {}
