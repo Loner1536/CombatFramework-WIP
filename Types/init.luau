@@ -1,26 +1,27 @@
 -- !strict
 
 export type Client = {
-	new: () -> (),
-	SetNetwork: (Path: string) -> (),
-	Start: (Client) -> (),
-}
+	new: () -> Client,
+	Constructor: (Client) -> Client,
 
+	SetNetwork: (Client, Instance) -> Client,
+	
+	Start: (Client) -> Client,
+}
 export type Server = {
-	new: () -> (),
-	SetNetwork: (Path: string) -> (),
-	SetFusion: (Path: string) -> (),
-	Start: (Server) -> (),
+	new: () -> Server,
+	Constructor: (Server) -> Server,
+
+	SetNetwork: (Server, Instance) -> Server,
+	SetFusion: (Server, Instance) -> Server,
+	SetFusionUtils: (Server, Instance) -> Server,
+
+	Start: (Server) -> Server,
 }
 
-export type Charcter = {
-	new: (Character: Model) -> (),
-	GetCharacterByModel: (Model) -> Charcter,
-}
 export type Framework = {
 	CreateClient: () -> Client,
 	CreateServer: () -> Server,
-	Character: Charcter,
 }
 
 return {}

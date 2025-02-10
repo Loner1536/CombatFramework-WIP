@@ -2,13 +2,12 @@
 
 --// Types //--
 local Types = require(script.Types)
---// Type Exports //--
+--// Exports //--
 export type Client = Types.Client
 export type Server = Types.Server
-export type Charcter = Types.Charcter
 
 export type Framework = Types.Framework
-
+--// Modules //--
 local modules = {}
 for _, module in script.src:GetChildren() do
 	table.insert(modules, require(module))

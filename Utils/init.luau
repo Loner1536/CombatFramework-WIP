@@ -10,6 +10,7 @@ local Network = {
 	Server = nil,
 }
 local Fusion
+local FusionUtils
 
 local function logMessage(Message)
 	print(`[{consolePrefix}]: {Message}`)
@@ -19,6 +20,12 @@ local function logWarning(Message, DisplayTraceback)
 		DisplayTraceback = true
 	end
 	warn(`[{consolePrefix}]: {Message} \n \n {if DisplayTraceback then debug.traceback() else nil}`)
+end
+local function logError(Message, DisplayTraceback)
+	local errorString = "Error"
+	return error(
+		"\n " .. errorString .. " \n " .. Message .. " \n \n " .. (DisplayTraceback and debug.traceback() or "")
+	)
 end
 local function isServerContext()
 	return RunService:IsServer()
@@ -62,8 +69,20 @@ local FusionFunctions = {
 		return Fusion
 	end,
 }
+local FusionUtilsFunctions = {
+	Set = function(path: Instance)
+		assert(path, "Expected a path for FusionUtils")
+		assert(typeof(path) == "Instance", "Expected Instance to be a string")
+		FusionUtils = require(path)
+	end,
+	Get = function()
+		assert(FusionUtils, "FusionUtils is not initialized")
+		return FusionUtils
+	end,
+}
 
 return {
+	logError = logError,
 	logMessage = logMessage,
 	logWarning = logWarning,
 	isServerContext = isServerContext,
@@ -71,4 +90,5 @@ return {
 
 	Network = NetworkFunctions,
 	Fusion = FusionFunctions,
+	FusionUtils = FusionUtilsFunctions,
 }
